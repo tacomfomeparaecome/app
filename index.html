@@ -254,13 +254,20 @@
           .catch(err => console.error("Erro ao registrar SW:", err));
       }
     };
-  </script>
-  <script>
+ 
+
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('./service-worker.js')
         .then(reg => console.log('Service Worker registrado!', reg))
         .catch(err => console.error('Erro ao registrar Service Worker:', err));
     }
+    
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/app/service-worker.js')
+      .then(function() { console.log("SW registrado!"); });
+  }
+
+
   </script>
   
 </body>
