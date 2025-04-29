@@ -1,274 +1,104 @@
-
-<!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Tá com Fome? Para e Come!</title>
-  <link rel="manifest" href="manifest.json">
-  <meta name="theme-color" content="#5422f7"/>
-  <link rel="icon" href="icon-192.png" type="image/png">
-  <link rel="manifest" href="manifest.json" />
-  <link rel="manifest" href="/app/manifest.json">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tá Com Fome </title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="/manifest.json">
+    
 
-<link rel="apple-touch-icon" href="logo192.png">
-<meta name="theme-color" content="#300aa3">
-
-  <style>
-    body {
-      font-family: 'Arial', sans-serif;
-      background-color: #5422f7;
-      margin: 0;
-      padding: 0;
-      color: #fff;
-    }
-    header {
-      background-color: #300aa3;
-      padding: 20px;
-      text-align: center;
-    }
-    header h1 {
-      font-family: 'Honk', sans-serif;
-      font-size: 48px;
-      color: #98d5f8;
-    }
-    .logo {
-      max-width: 120px;
-      display: block;
-      margin: 0 auto 10px;
-    }
-    .container {
-      max-width: 1200px;
-      margin: 20px auto;
-      padding: 20px;
-      background: #fff;
-      border-radius: 10px;
-      color: #000;
-    }
-    h2 {
-      text-align: center;
-      color: #5422f7;
-    }
-    form {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-bottom: 20px;
-    }
-    form input, form select {
-      padding: 10px;
-      border-radius: 5px;
-      border: 1px solid #ccc;
-      flex: 1;
-      min-width: 200px;
-    }
-    form input[type="button"] {
-      background-color: #300aa3;
-      color: #fff;
-      cursor: pointer;
-      flex: 1;
-    }
-    .category-section {
-      margin-top: 40px;
-    }
-    .category-title {
-      font-size: 28px;
-      margin-bottom: 20px;
-      border-bottom: 2px solid #300aa3;
-      padding-bottom: 5px;
-    }
-    .card-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-      gap: 20px;
-    }
-    .card {
-      background-color: #f4f4f4;
-      border-radius: 10px;
-      padding: 15px;
-      text-align: center;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-      position: relative;
-    }
-    .card img {
-      width: 100%;
-      height: 150px;
-      object-fit: cover;
-      border-radius: 8px;
-    }
-    .card h3, .card p {
-      margin: 10px 0;
-    }
-    .card .price {
-      font-size: 18px;
-      color: #e67e22;
-      font-weight: bold;
-    }
-    .card button {
-      margin-top: 10px;
-      padding: 8px 12px;
-      border: none;
-      border-radius: 5px;
-      background-color: #25d366;
-      color: white;
-      cursor: pointer;
-    }
-    .delete-btn {
-      background-color: #c00;
-      margin-top: 5px;
-    }
-    #generate-link {
-      background-color: #28a745;
-      margin-top: 10px;
-      padding: 10px;
-      border-radius: 5px;
-      color: white;
-      cursor: pointer;
-      border: none;
-    }
-  </style>
 </head>
 <body>
-  <header>
-    <img src="icon-192.png" alt="Logo" class="logo">
-    <h1>Tá com Fome? Para e Come!</h1>
-  </header>
+    <div class="header">
+        <img id="logoImg" src="Figura1-transformed.png" alt="Logo" width="200">
+        <h1> Tá Com Fome </h1>
+        <button id="btnSair" class="hidden" onclick="logout()">Sair</button>
+    </div>
+     <!-- Login -->
+     <div class="login" id="login">
+        <h2>Login</h2>
+        <label>Usuário</label>
+        <input type="text" id="usuario">
+        <label>Senha</label>
+        <input type="password" id="senha">
+        <button onclick="logar()">Entrar</button>
+    </div>
+    <!-- Admin -->
+    <div class="admin hidden" id="admin">
+        <h2>Logo da Hamburgueria</h2>
+        <input type="file" id="logoInput" accept="image/*">
 
-  <div class="container">
-    <h2>Cadastro de Produto</h2>
-    <form id="product-form">
-      <input type="text" id="product-name" placeholder="Nome do Produto" required />
-      <input type="text" id="product-description" placeholder="Descrição" required />
-      <input type="number" id="product-price" placeholder="Preço" step="0.01" required />
-      <input type="file" id="product-image" accept="image/*" required />
-      <select id="product-category" required>
-        <option value="">Categoria</option>
-        <option value="Hambúrgueres">Hambúrgueres</option>
-        <option value="Hot Dogs">Hot Dogs</option>
-        <option value="Porções">Porções</option>
-        <option value="Mascotes">Mascotes</option>
-        <option value="Bebidas">Bebidas</option>
-      </select>
-      <input type="button" value="Adicionar Produto" onclick="addNewProduct()" />
-    </form>
+        <h2>Cadastro de Categoria</h2>
+        <input type="text" id="novaCategoria" placeholder="Nome da Categoria">
+        <button onclick="adicionarCategoria()">Adicionar Categoria</button>
 
-    <button id="generate-link" onclick="generateMenuLink()">Gerar Link do Cardápio</button>
-    <div id="menu-container"></div>
-  </div>
+        <h2>Cadastro de Produto</h2>
+        <input type="text" id="nomeProduto" placeholder="Nome do Produto">
+        <input type="text" id="precoProduto" placeholder="Preço">
+        <textarea id="itensProduto" placeholder="Itens do produto (separados por vírgula)"></textarea>
+        <input type="file" id="imagemProduto" accept="image/*">
+        <select id="selectCategoria"></select>
+        <button onclick="adicionarProduto()">Adicionar Produto</button>
 
-  <script>
-    let products = [];
+        <button onclick="mostrarCardapio()">Ir para o Cardápio</button>
+        <button onclick="compartilharCardapio()">Compartilhar Cardápio</button>
+   
+        <button id="btn-excluir-produto" onclick="excluirProduto()">Excluir Produto</button>
+        <select id="select-produto">
+           <option value="">Selecione um produto</option>
+        </select>
 
-    function addNewProduct() {
-      const name = document.getElementById('product-name').value;
-      const desc = document.getElementById('product-description').value;
-      const price = parseFloat(document.getElementById('product-price').value);
-      const category = document.getElementById('product-category').value;
-      const imageFile = document.getElementById('product-image').files[0];
-
-      if (!name || !desc || isNaN(price) || !imageFile || !category) {
-        alert("Preencha todos os campos!");
-        return;
-      }
-
-      const reader = new FileReader();
-      reader.onload = function (e) {
-        const imageData = e.target.result;
-        const product = {
-          id: Date.now(),
-          name,
-          desc,
-          price,
-          category,
-          image: imageData
-        };
-        products.push(product);
-        localStorage.setItem("menuProducts", JSON.stringify(products));
-        renderMenu();
-        document.getElementById('product-form').reset();
-      };
-      reader.readAsDataURL(imageFile);
-    }
-
-    function renderMenu() {
-      const container = document.getElementById('menu-container');
-      container.innerHTML = '';
-      const categories = [...new Set(products.map(p => p.category))];
-
-      categories.forEach(category => {
-        const section = document.createElement('div');
-        section.className = 'category-section';
-
-        const title = document.createElement('h3');
-        title.className = 'category-title';
-        title.textContent = category;
-        section.appendChild(title);
-
-        const grid = document.createElement('div');
-        grid.className = 'card-grid';
-
-        products.filter(p => p.category === category).forEach(product => {
-          const card = document.createElement('div');
-          card.className = 'card';
-
-          const message = encodeURIComponent(`Olá! Gostaria de pedir o seguinte item:\n\n${product.name}\n${product.desc}\nPreço: R$ ${product.price.toFixed(2)}\n`);
-          const whatsappLink = `https://wa.me/5532984885431?text=${message}`;
-
-          card.innerHTML = `
-            <img src="${product.image}" alt="${product.name}">
-            <h3>${product.name}</h3>
-            <p>${product.desc}</p>
-            <p class="price">R$ ${product.price.toFixed(2)}</p>
-            <a href="${whatsappLink}" target="_blank"><button>Fazer Pedido pelo WhatsApp</button></a>
-            <button class="delete-btn" onclick="deleteProduct(${product.id})">Excluir</button>
-          `;
-          grid.appendChild(card);
-        });
-
-        section.appendChild(grid);
-        container.appendChild(section);
-      });
-    }
-
-    function deleteProduct(id) {
-      products = products.filter(p => p.id !== id);
-      localStorage.setItem("menuProducts", JSON.stringify(products));
-      renderMenu();
-    }
-
-    function generateMenuLink() {
-      const blob = new Blob([JSON.stringify(products)], { type: 'application/json' });
-      const url = URL.createObjectURL(blob);
-      prompt("Copie o link do cardápio abaixo:", url);
-    }
-
-    window.onload = function () {
-      const saved = localStorage.getItem("menuProducts");
-      if (saved) {
-        products = JSON.parse(saved);
-        renderMenu();
-      }
-      if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('service-worker.js')
-          .then(reg => console.log("Service Worker registrado."))
-          .catch(err => console.error("Erro ao registrar SW:", err));
-      }
-    };
- 
-
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('./service-worker.js')
-        .then(reg => console.log('Service Worker registrado!', reg))
-        .catch(err => console.error('Erro ao registrar Service Worker:', err));
-    }
+        <button id="btn-excluir-categoria" onclick="excluirCategoria()">Excluir Categoria</button>
+        <select id="select-categoria">
+           <option value="">Selecione uma categoria</option>
+        </select>
+     
     
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('/app/service-worker.js')
-      .then(function() { console.log("SW registrado!"); });
-  }
+    </div>
 
+    <!-- Cardápio -->
+    <div class="cardapio hidden" id="cardapio">
+        <h2>Cardápio</h2>
+        <div id="listaCardapio"></div>
+        <button onclick="mostrarCarrinho()">Finalizar Pedido</button>
+        <button onclick="voltarAdmin()">Voltar ao Admin</button>
+    </div>
 
-  </script>
-  
+    <!-- Carrinho Modal -->
+    <div class="carrinho-modal" id="carrinhoModal">
+        <h2>Resumo do Pedido</h2>
+        <div id="itensCarrinho"></div>
+        <h3>Forma de Pagamento</h3>
+        <div class="radio-group">
+            <label><input type="radio" name="pagamento" value="dinheiro" onchange="toggleTroco()"> Dinheiro</label>
+            <label><input type="radio" name="pagamento" value="cartao" onchange="toggleTroco()"> Cartão</label>
+            <label><input type="radio" name="pagamento" value="pix" onchange="toggleTroco()"> PIX</label>
+        </div>
+        <input type="text" id="trocoPara" class="hidden" placeholder="Troco para quanto?">
+        <h3>Entrega ou Retirada</h3>
+        <div class="radio-group">
+            <label><input type="radio" name="entregaRetirada" value="retirada" onchange="toggleEndereco()"> Retirada</label>
+            <label><input type="radio" name="entregaRetirada" value="entrega" onchange="toggleEndereco()"> Entrega</label>
+        </div>
+        <label for="nomeCliente">Nome do Cliente:</label>
+        <input type="text" id="nomeCliente" required>
+        <div id="enderecoCampos" class="hidden">
+            <input type="text" id="endereco" placeholder="Endereço">
+            <input type="text" id="bairro" placeholder="Bairro">
+            <input type="text" id="numero" placeholder="Número">
+        </div>
+        <button onclick="confirmarPedido()">Confirmar Pedido</button>
+        <button onclick="fecharCarrinho()">Fechar</button>
+    </div>
+
+    <!-- Tela de Pedidos -->
+    <div class="tela-pedidos hidden" id="telaPedidos">
+        <h2>Pedido Confirmado!</h2>
+        <div id="detalhesPedido"></div>
+        <button onclick="voltarCardapio()">Voltar ao Cardápio</button>
+    </div>
+
+    <script src="script.js"></script>
+    
 </body>
 </html>
