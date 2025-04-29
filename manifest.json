@@ -1,15 +1,20 @@
 {
-  "name": "Tá com Fome? Para e Come!",
-  "short_name": "Para e Come",
-  "start_url": "/app/index.html",
-  "display": "standalone",
-  "background_color": "#5422f7",
-  "theme_color": "#300aa3",
+  "short_name": "Tá Com Fome",
+  "name": "Tá Com Fome",
   "icons": [
     {
-      "src": "/app/logo192.png",
-      "sizes": "192x192",
-      "type": "image/png"
+      "src": "/icon-192x192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/icon-512x512.png",
+      "type": "image/png",
+      "sizes": "512x512"
     }
-  ]
+  ],
+  "start_url": "/",
+  "background_color": "#f7f0eb",
+  "display": "standalone",
+  "theme_color": "#a29bfe"
 }
